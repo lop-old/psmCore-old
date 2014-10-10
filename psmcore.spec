@@ -1,17 +1,17 @@
-Name:           psmCore
-Summary:        Content management framework
-Version:        3.4.%{BUILD_NUMBER}
-Release:        1
-BuildArch:      noarch
-Requires:       php >= 5.4.0
-Requires:       gd
-Provides:       php-psm
-Prefix:         /usr/local/lib/php/psmcore
+Name            : psmCore
+Summary         : Content management framework
+Version         : 3.4.%{BUILD_NUMBER}
+Release         : 1
+BuildArch       : noarch
+Requires        : php >= 5.4.0
+Requires        : gd
+Provides        : php-psm
+Prefix          : /usr/local/lib/php/psmcore
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.noarch.rpm
 
-License:        [[TBA]]
-Group:          /
-URL:            http://psm.poixson.com/
+License         : [[TBA]]
+Group           : /
+URL             : http://psm.poixson.com/
 
 %description
 Content management framework for php websites. This package allows the framework to be shared between websites.
