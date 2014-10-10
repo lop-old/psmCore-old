@@ -10,19 +10,12 @@ Prefix          : /usr/local/lib/php/psmcore
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.noarch.rpm
 
 License         : [[TBA]]
-Group           : /
+Group           : Development/PHP
+Packager        : PoiXson <support@poixson.com>
 URL             : http://psm.poixson.com/
 
 %description
 Content management framework for php websites. This package allows the framework to be shared between websites.
-
-
-
-%prep
-
-
-
-%build
 
 
 
