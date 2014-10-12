@@ -51,14 +51,14 @@ echo "Install.."
 %{__rm} -fv "%{_rpmdir}/%{name}"*.noarch.rpm
 # create directories
 %{__install} -d -m 0755 \
-	"${RPM_BUILD_ROOT}%{prefix}" \
+	"${RPM_BUILD_ROOT}%{prefix}/" \
 	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/" \
 		|| exit 1
 # copy .php files
 for phpfile in \
 	index.php \
 ; do
-	%{__install} -m 0755 \
+	%{__install} -m 0555 \
 		"%{sourceroot}/www/psmcore/${phpfile}" \
 		"${RPM_BUILD_ROOT}%{prefix}/${phpfile}" \
 			|| exit 1
@@ -81,7 +81,7 @@ fi
 
 ### Files ###
 %files
-%defattr(555,root,root,755)
+%defattr(-,root,root,-)
 %{prefix}/index.php
 /etc/httpd/conf.d/psmcore.conf
 
