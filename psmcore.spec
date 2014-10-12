@@ -19,6 +19,31 @@ Content management framework for php websites. This package allows the framework
 
 
 
+%build
+# build apache include file
+%{__cat} <<EOF >psmcore.conf
+
+<Directory "/usr/local/lib/php/psmcore">
+	Options -Indexes
+	AllowOverride None
+
+	# Apache 2.4
+	<IfModule mod_authz_core.c>
+		Require all granted
+	</IfModule>
+	# Apache 2.2
+	<IfModule !mod_authz_core.c>
+		Order Deny,Allow
+		Allow from all
+	</IfModule>
+
+</Directory>
+Alias /psmcore /usr/local/lib/php/psmcore
+
+EOF
+
+
+
 %install
 echo
 echo "Install.."
@@ -27,6 +52,7 @@ echo "Install.."
 # create directories
 %{__install} -d -m 0755 \
 	"${RPM_BUILD_ROOT}%{prefix}" \
+	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/" \
 		|| exit 1
 # copy .php files
 for phpfile in \
@@ -37,6 +63,11 @@ for phpfile in \
 		"${RPM_BUILD_ROOT}%{prefix}/${phpfile}" \
 			|| exit 1
 done
+# copy psmcore.conf apache config
+%{__install} -m 644 \
+	"psmcore.conf" \
+	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/psmcore.conf" \
+		|| exit 1
 
 
 
@@ -52,4 +83,5 @@ fi
 %files
 %defattr(555,root,root,755)
 %{prefix}/index.php
+/etc/httpd/conf.d/psmcore.conf
 
