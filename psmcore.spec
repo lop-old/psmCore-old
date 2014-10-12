@@ -41,6 +41,12 @@ Content management framework for php websites. This package allows the framework
 Alias /psmcore /usr/local/lib/php/psmcore
 
 EOF
+# build php include file
+%{__cat} <<EOF >psmcore.ini
+
+include_path = ".:/usr/local/lib/php"
+
+EOF
 
 
 
@@ -53,6 +59,7 @@ echo "Install.."
 %{__install} -d -m 0755 \
 	"${RPM_BUILD_ROOT}%{prefix}/" \
 	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/" \
+	"${RPM_BUILD_ROOT}/etc/php.d/" \
 		|| exit 1
 # copy .php files
 for phpfile in \
@@ -67,6 +74,11 @@ done
 %{__install} -m 644 \
 	"psmcore.conf" \
 	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/psmcore.conf" \
+		|| exit 1
+# copy psmcore.ini php config
+%{__install} -m 644 \
+	"psmcore.ini" \
+	"${RPM_BUILD_ROOT}/etc/php.d/psmcore.ini" \
 		|| exit 1
 
 
@@ -84,4 +96,5 @@ fi
 %defattr(-,root,root,-)
 %{prefix}/index.php
 /etc/httpd/conf.d/psmcore.conf
+/etc/php.d/psmcore.ini
 
