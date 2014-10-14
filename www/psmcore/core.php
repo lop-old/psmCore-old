@@ -70,6 +70,14 @@ paths::init();
 
 // includes
 require('inc.php');
+// auto-class-loader
+require('ClassLoader.php');
+ClassLoader::increment(); // for inc.php
+ClassLoader::increment(); // for vars.class.php
+// register core classpath
+ClassLoader::registerPath('psm', paths::core());
+// register entry point
+ClassLoader::registerPath('entry', paths::entry());
 
 
 
