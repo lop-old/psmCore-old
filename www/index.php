@@ -1,5 +1,6 @@
 <?php
 
-require('psm/index.php');
+define('psm\\DEBUG', TRUE);
+require('psm/core.php');
 
 ?>
