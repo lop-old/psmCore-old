@@ -57,7 +57,6 @@ newline
 
 
 
-Cleanup
 newline
 echo "Finished workspace setup!"
 newline
