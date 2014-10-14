@@ -81,4 +81,9 @@ ClassLoader::registerPath('entry', paths::entry());
 
 
 
+// load portal
+portal::get();
+
+
+
 ?>
