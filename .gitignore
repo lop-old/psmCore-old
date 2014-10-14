@@ -6,3 +6,11 @@ rpmbuild-root/
 .*.swp
 *~
 
+.htaccess
+/psmcore/static/
+/data/
+/target/
+/rpmbuild-root/
+
+config.php
+
