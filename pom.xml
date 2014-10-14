@@ -12,7 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<build>
-		<finalName>ProSiteManager-${project.version}</finalName>
+		<finalName>psmCore-${project.version}</finalName>
 		<sourceDirectory>www/</sourceDirectory>
 <!--
 		<directory>target</directory>
