@@ -42,4 +42,30 @@ define('psm\\INDEX_DEFINE', TRUE);
 
 
 
+// paths dao
+class paths {
+
+	protected static $core  = '';
+	protected static $entry = '';
+
+
+	public static function init() {
+		self::$core  = __dir__;
+		self::$entry = getcwd();
+	}
+
+
+	public static function core() {
+		return self::$core;
+	}
+	public static function entry() {
+		return self::$entry;
+	}
+
+
+}
+paths::init();
+
+
+
 ?>
