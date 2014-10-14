@@ -63,6 +63,40 @@ if(file_exists(\psm\Paths::getLocal('portal').DIR_SEP.'kint.php')) {
 if(file_exists(\psm\Paths::getLocal('portal').DIR_SEP.'php_error.php')) {
 	include(\psm\Paths::getLocal('portal').DIR_SEP.'php_error.php');
 }
+// Kint backtracer
+$kintPath = \psm\Paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'kint'.DIR_SEP.'Kint.class.php';
+if(file_exists($kintPath)) {
+	//global $GLOBALS;
+	//if(!@is_array(@$GLOBALS)) $GLOBALS = array();
+	//$_kintSettings = &$GLOBALS['_kint_settings'];
+	//$_kintSettings['traceCleanupCallback'] = function($traceStep) {
+	//echo '<pre>';print_r($traceStep);exit();
+	//	if(isset($traceStep['class']) && $traceStep['class'] === 'Kint')
+	//		return null;
+	//	if(isset($traceStep['function']) && \strtolower($traceStep['function']) === '__tostring')
+	//		$traceStep['function'] = '[object converted to string]';
+	//	return $traceStep;
+	//};
+	//echo '<pre>';print_r($_kintSettings);exit();
+	include($kintPath);
+	}
+	// php_error
+	$phpErrorPath = \psm\Paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'php_error.php';
+	if(file_exists($phpErrorPath))
+		include($phpErrorPath);
+		if(function_exists('php_error\\reportErrors')) {
+			$reportErrors = '\\php_error\\reportErrors';
+			$reportErrors(array(
+					'catch_ajax_errors'      => TRUE,
+					'catch_supressed_errors' => FALSE,
+					'catch_class_not_found'  => FALSE,
+					'snippet_num_lines'      => 11,
+					'application_root'       => __DIR__,
+					'background_text'        => 'PSM',
+			));
+		}
+	}
+}
 */
 
 
