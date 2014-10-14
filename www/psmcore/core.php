@@ -68,4 +68,9 @@ paths::init();
 
 
 
+// includes
+require('inc.php');
+
+
+
 ?>
