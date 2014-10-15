@@ -61,6 +61,7 @@ echo "Install.."
 	"${RPM_BUILD_ROOT}%{prefix}/engine" \
 	"${RPM_BUILD_ROOT}%{prefix}/portal" \
 	"${RPM_BUILD_ROOT}%{prefix}/utils" \
+	"${RPM_BUILD_ROOT}%{prefix}/website" \
 	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/" \
 	"${RPM_BUILD_ROOT}/etc/php.d/" \
 		|| exit 1
@@ -70,9 +71,12 @@ for phpfile in \
 	'inc.php' \
 	'ClassLoader.php' \
 	'config.php.original' \
+	'engine/engine.class.php' \
+	'engine/engine_block.class.php' \
+	'engine/engine_head.class.php' \
 	'engine/manager.class.php' \
-	'engine/tpl.class.php' \
 	'engine/phpclss.class.php' \
+	'engine/tpl.class.php' \
 	'portal/portal.class.php' \
 	'portal/module.class.php' \
 	'utils/utils.class.php' \
@@ -81,6 +85,7 @@ for phpfile in \
 	'utils/PassCrypt.class.php' \
 	'utils/san.class.php' \
 	'utils/vars.class.php' \
+	'website/website.class.php' \
 ; do
 	%{__install} -m 0555 \
 		"%{sourceroot}/www/psmcore/${phpfile}" \
@@ -115,9 +120,12 @@ fi
 %{prefix}/inc.php
 %{prefix}/ClassLoader.php
 %{prefix}/config.php.original
+%{prefix}/engine/engine.class.php
+%{prefix}/engine/engine_block.class.php
+%{prefix}/engine/engine_head.class.php
 %{prefix}/engine/manager.class.php
-%{prefix}/engine/tpl.class.php
 %{prefix}/engine/phpclss.class.php
+%{prefix}/engine/tpl.class.php
 %{prefix}/portal/portal.class.php
 %{prefix}/portal/module.class.php
 %{prefix}/utils/utils.class.php
@@ -126,6 +134,7 @@ fi
 %{prefix}/utils/PassCrypt.class.php
 %{prefix}/utils/san.class.php
 %{prefix}/utils/vars.class.php
+%{prefix}/website/website.class.php
 /etc/httpd/conf.d/psmcore.conf
 /etc/php.d/psmcore.ini
 
