@@ -37,6 +37,8 @@ class manager implements \psm\engine {
 	public function render() {
 		if($this->hasRendered()) return;
 		$this->hasRendered(TRUE);
+		// ensure website has loaded
+		\psm\portal::get()->getWebsite();
 		// header
 		$this->head->render();
 		// body

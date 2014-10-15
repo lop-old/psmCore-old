@@ -8,8 +8,8 @@ class portal {
 	private static $instance = NULL;
 
 	// website modules
-	private $availableMods = array();
-	private $module = NULL;
+	private static $available = array();
+	private $website = NULL;
 
 	// page
 	private $pageStr = NULL;
@@ -78,12 +78,41 @@ class portal {
 
 
 
-	// scan for available modules
-	public static function ScanModules() {
+	// scan for available website modules
+	public static function ScanWebsites($dir) {
 		$portal = self::get();
-
-
+		// get directory contents
+		$array = \scandir($dir, SCANDIR_SORT_NONE);
+		foreach($array as $entry) {
+			if(empty($entry) || substr($entry, 0, 1) === '.') continue;
+			// is dir
+			if(!\is_dir($dir.DIR_SEP.$entry)) continue;
+			// path to website.php file
+			$file = $dir.DIR_SEP.$entry.DIR_SEP.'website.php';
+			if(!\is_file($file)) continue;
+			// website.php file exists
+			self::$available[$entry] = $file;
+		}
 		unset($portal);
+	}
+	public function getWebsite() {
+		if($this->website == NULL) {
+			self::ScanWebsites(paths::core());
+			self::ScanWebsites(paths::entry());
+			if(empty(self::$available))
+				fail('No website modules available!');
+			// get first available
+			$file = \reset(self::$available);
+			$name = \key(self::$available);
+			$result = include($file);
+			if($result === FALSE)
+				fail('Failed to load website file: '.$file);
+			// new website instance
+			$clss = '\\'.$name.'\\'.$name.'_website';
+			$this->website = new $clss();
+			if($this->website == NULL)
+				fail('Failed to create a new website instance: '.$clss);
+		}
 	}
 
 
