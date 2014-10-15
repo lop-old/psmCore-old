@@ -92,7 +92,7 @@ class portal {
 		return \psm\debug($debug);
 	}
 	public function version() {
-		return self::VERSION;
+		return self::$VERSION;
 	}
 
 
