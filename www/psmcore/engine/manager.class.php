@@ -37,7 +37,15 @@ class manager implements \psm\engine {
 	public function render() {
 		if($this->hasRendered()) return;
 		$this->hasRendered(TRUE);
-		echo '<p>RENDER</p>';
+		// header
+		$this->head->render();
+		// body
+		echo '<body>'.NEWLINE
+			.NEWLINE.NEWLINE;
+		$this->body->render();
+		echo NEWLINE.NEWLINE
+			.'</body>'.NEWLINE
+			.'</html>'.NEWLINE;
 	}
 
 
