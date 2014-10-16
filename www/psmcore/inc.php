@@ -5,10 +5,6 @@ if(!defined('psm\\INDEX_DEFINE') || \psm\INDEX_DEFINE !== TRUE) { echo '<header>
 
 
 
-require('utils/vars.class.php');
-
-
-
 // global defines
 define('DIR_SEP',   DIRECTORY_SEPARATOR);
 define('CLASS_EXT', '.class.php');
@@ -28,6 +24,10 @@ define('S_DAY',    S_HOUR * 24   );
 define('S_WEEK',   S_DAY * 7     );
 define('S_MONTH',  S_DAY * 30    );
 define('S_YEAR',   S_DAY * 365   );
+
+
+
+require('utils/vars.class.php');
 
 
 
