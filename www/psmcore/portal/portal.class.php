@@ -18,8 +18,6 @@ class portal {
 	// action
 	private $action = NULL;
 
-	private $engine = NULL;
-
 	private $debug = FALSE;
 
 
@@ -42,7 +40,7 @@ class portal {
 //		if(defined('psm\\MODULE'))
 //		if(defined('psm\\PAGE'))
 		// load html engine
-		$this->engine = \psm\engine\manager::get();
+//		$this->engine = \psm\engine::get();
 		// shutdown hook
 		\register_shutdown_function('psm\\portal::shutdown');
 	}
@@ -127,10 +125,10 @@ class portal {
 
 
 	public function hasRendered($rendered=NULL) {
-		return $this->engine->hasRendered();
+		return \psm\engine::get()->hasRendered();
 	}
 	public function render() {
-		$this->engine->render();
+		\psm\engine::get()->render();
 	}
 
 
