@@ -3,9 +3,11 @@ if(!defined('psm\\PORTAL_LOADED') || \psm\PORTAL_LOADED !== TRUE) { echo '<heade
 	echo '<font size="+2" style="color: black; background-color: white;">Access Denied!!</font>'; exit(1); }
 interface module {
 
+
 	public function Render();
 
 	public function getDefaultPage();
+
 
 }
 ?>

@@ -36,12 +36,12 @@ class engine_head implements \psm\engine\engine_interface {
 	public function render() {
 		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"'.NEWLINE.
 				'"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.NEWLINE;
-		echo '<head>'.NEWLINE
-				.'<meta charset="utf-8" />'.NEWLINE
-				.'<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />'.NEWLINE
-				.'<meta name="viewport" content="width=device-width, initial-scale=1" />'.NEWLINE
-				.'<meta name="GOOGLEBOT" content="index,follow" />'.NEWLINE
-				.'<meta name="language" content="EN-US" />'.NEWLINE;
+		echo '<head>'.NEWLINE.
+				'<meta charset="utf-8" />'.NEWLINE.
+				'<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />'.NEWLINE.
+				'<meta name="viewport" content="width=device-width, initial-scale=1" />'.NEWLINE.
+				'<meta name="GOOGLEBOT" content="index,follow" />'.NEWLINE.
+				'<meta name="language" content="EN-US" />'.NEWLINE;
 		if(!empty($this->title))
 			echo '<title>'.$this->title.'</title>'.NEWLINE;
 		if(!empty($this->description))
@@ -61,12 +61,10 @@ class engine_head implements \psm\engine\engine_interface {
 				echo '<script src="'.$file.'"></script>'.NEWLINE;
 			}
 		}
-//<link rel="shortcut icon" href="/images/treeicon.ico" type="image/x-icon" />
-//<link rel="icon" href="/images/treeicon.ico" type="image/x-icon" />
 		foreach($this->content as $chunk)
-			echo NEWLINE.NEWLINE
-				.$chunk.NEWLINE
-				.NEWLINE.NEWLINE;
+			echo NEWLINE.NEWLINE.
+				$chunk.NEWLINE.
+				NEWLINE.NEWLINE;
 		echo '</head>'.NEWLINE.NEWLINE;
 	}
 

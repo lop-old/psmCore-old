@@ -39,8 +39,8 @@ class engine_block implements \psm\engine\engine_interface {
 
 	public function render() {
 		foreach($this->content as $chunk)
-			echo $chunk.NEWLINE
-				.NEWLINE.NEWLINE;
+			echo $chunk.NEWLINE.
+				NEWLINE.NEWLINE;
 	}
 
 
