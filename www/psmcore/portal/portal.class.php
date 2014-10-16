@@ -32,7 +32,7 @@ class portal {
 	}
 	// new portal instance
 	private function __construct() {
-		if(defined('PORTAL_LOADED')) {
+		if(defined('psm\\PORTAL_LOADED')) {
 			echo '<p>Portal class already loaded?!</p>';
 			exit(1);
 		}
