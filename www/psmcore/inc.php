@@ -97,6 +97,7 @@ function backtrace() {
 	);
 //	$ignore = array();
 	foreach($trace as $index => $tr) {
+		if(!isset($tr['file'])) continue;
 		$file = basename($tr['file']);
 		if(isset($ignore[$file])) {
 			$func = $tr['function'];
@@ -115,7 +116,7 @@ function backtrace() {
 		$first = FALSE;
 		echo '<tr style="background-color: '.$bgcolor.';">'.NEWLINE;
 		echo TAB.'<td><font size="-2">#'.((int) $num).'</font></td>'.NEWLINE;
-		echo TAB.'<td>'.$tr['file'].'</td>'.NEWLINE;
+		echo TAB.'<td>'.@$tr['file'].'</td>'.NEWLINE;
 		echo '</tr>'.NEWLINE;
 		echo '<tr style="background-color: '.$bgcolor.';">'.NEWLINE;
 		echo TAB.'<td></td>'.NEWLINE;
@@ -133,11 +134,11 @@ function backtrace() {
 			}
 		}
 		echo TAB.'<td>'.
-				'<i>'.basename($tr['file']).'</i> '.
+				(isset($tr['file']) ? '<i>'.basename($tr['file']).'</i> ' : '' ).
 				'<font size="-1">--&gt;</font> '.
 				'<b>'.$tr['function'].'</b> '.
 				'( '.$args.' ) '.
-				'<font size="-1">line: '.$tr['line'].'</font>'.
+				(isset($tr['line']) ? '<font size="-1">line: '.$tr['line'].'</font>' : '' ).
 				'</td>'.NEWLINE;
 		echo '</tr>'.NEWLINE;
 	}
