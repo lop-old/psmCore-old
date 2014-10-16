@@ -203,6 +203,20 @@ if(file_exists($kintPath)) {
 		}
 	}
 }
+// error page
+public static function Error($msg) {
+	echo '<div style="background-color: #ffbbbb;">'.NEWLINE;
+	if(!empty($msg))
+		echo '<h4>Error: '.$msg.'</h4>'.NEWLINE;
+	echo '<h3>Backtrace:</h3>'.NEWLINE;
+//	if(\method_exists('Kint', 'trace'))
+//		\Kint::trace();
+//	else
+		echo '<pre>'.print_r(\debug_backtrace(), TRUE).'</pre>';
+	echo '</div>'.NEWLINE;
+//	\psm\Portal::Unload();
+	exit(1);
+}
 */
 
 
@@ -342,6 +356,12 @@ function log() {
 class logger {
 //TODO:
 }
+//function addlog($text){global $config,$pathroot;
+//if(substr($config['log file'],-4)!='.txt'){die('error in log file var');}
+//$fp=@fopen($pathroot.$config['log file'],'a') or die('failed to write log');
+//fwrite($fp,date('Y-m-d H:i:s').' - '.trim($text)."\r\n");
+//fclose($fp);
+//}
 
 
 
