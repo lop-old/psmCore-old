@@ -5,7 +5,9 @@ class engine_head implements \psm\engine\engine_interface {
 
 	protected static $instance = NULL;
 
-	protected $content = array();
+	public $content = array();
+	public $cssfiles = array();
+	public $jsfiles = array();
 
 	public $title = NULL;
 	public $description = NULL;
@@ -45,6 +47,20 @@ class engine_head implements \psm\engine\engine_interface {
 		if(!empty($this->description))
 			echo '<meta name="Description" content="'.$this->description.'" />'.NEWLINE;
 		echo '<meta name="generator" content="ProSiteManager Core '.self::getVersion().'" />'.NEWLINE;
+		// include css files
+		if(!empty($this->cssfiles)) {
+			foreach($this->cssfiles as $file) {
+				if(empty($file)) continue;
+				echo '<link rel="stylesheet" href="'.$file.'" />'.NEWLINE;
+			}
+		}
+		// include js files
+		if(!empty($this->jsfiles)) {
+			foreach($this->jsfiles as $file) {
+				if(empty($file)) continue;
+				echo '<script src="'.$file.'"></script>'.NEWLINE;
+			}
+		}
 //<link rel="shortcut icon" href="/images/treeicon.ico" type="image/x-icon" />
 //<link rel="icon" href="/images/treeicon.ico" type="image/x-icon" />
 		foreach($this->content as $chunk)
@@ -62,6 +78,40 @@ class engine_head implements \psm\engine\engine_interface {
 		if($pos !== FALSE)
 			return \substr($vers, 0, $pos);
 		return $vers;
+	}
+
+
+
+	public function cssFile($file) {
+		if(in_array($file, $this->cssfiles)) return;
+		$this->cssfiles[] = $file;
+	}
+	public function jsFile($file) {
+		if(in_array($file, $this->jsfiles)) return;
+		$this->jsfiles[] = $file;
+	}
+
+
+
+	public function css($code) {
+		$data = \trim($code);
+		if(empty($data)) return;
+		$this->content[] =
+				NEWLINE.NEWLINE.
+				'<style type="text/css"><!--'.NEWLINE.
+				$data.NEWLINE.
+				'--></style>'.NEWLINE.
+				NEWLINE.NEWLINE;
+	}
+	public function js($code) {
+		$data = \trim($code);
+		if(empty($data)) return;
+		$this->content[] =
+				NEWLINE.NEWLINE.
+				'<script type="text/javascript"><!--//'.NEWLINE.
+				$data.NEWLINE.
+				'//--></script>'.NEWLINE.
+				NEWLINE.NEWLINE;
 	}
 
 
