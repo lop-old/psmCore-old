@@ -72,9 +72,10 @@ for phpfile in \
 	'ClassLoader.php' \
 	'config.php.original' \
 	'engine/engine.class.php' \
+	'engine/render.class.php' \
+	'engine/engine_interface.class.php' \
 	'engine/engine_block.class.php' \
 	'engine/engine_head.class.php' \
-	'engine/manager.class.php' \
 	'engine/phpclss.class.php' \
 	'engine/tpl.class.php' \
 	'portal/portal.class.php' \
@@ -121,9 +122,10 @@ fi
 %{prefix}/ClassLoader.php
 %{prefix}/config.php.original
 %{prefix}/engine/engine.class.php
+%{prefix}/engine/render.class.php
+%{prefix}/engine/engine_interface.class.php
 %{prefix}/engine/engine_block.class.php
 %{prefix}/engine/engine_head.class.php
-%{prefix}/engine/manager.class.php
 %{prefix}/engine/phpclss.class.php
 %{prefix}/engine/tpl.class.php
 %{prefix}/portal/portal.class.php
