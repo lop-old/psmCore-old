@@ -18,8 +18,6 @@ class portal {
 	// action
 	private $action = NULL;
 
-	private $debug = FALSE;
-
 
 
 	// get portal
@@ -55,23 +53,6 @@ class portal {
 			$portal->render();
 		}
 		unset($portal);
-	}
-
-
-
-	// error page
-	public static function Error($msg) {
-		echo '<div style="background-color: #ffbbbb;">'.NEWLINE;
-		if(!empty($msg))
-			echo '<h4>Error: '.$msg.'</h4>'.NEWLINE;
-		echo '<h3>Backtrace:</h3>'.NEWLINE;
-//		if(\method_exists('Kint', 'trace'))
-//			\Kint::trace();
-//		else
-			echo '<pre>'.print_r(\debug_backtrace(), TRUE).'</pre>';
-		echo '</div>'.NEWLINE;
-//		\psm\Portal::Unload();
-		exit(1);
 	}
 
 
@@ -115,9 +96,6 @@ class portal {
 
 
 
-	public function debug($debug=NULL) {
-		return \psm\debug($debug);
-	}
 	public function version() {
 		return self::$VERSION;
 	}
