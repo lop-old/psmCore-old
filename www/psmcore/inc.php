@@ -223,7 +223,7 @@ function debug($debug=NULL) {
 				\ini_set('html_errors',    'On');
 			// disabled
 			} else {
-				\error_reporting(0);
+				error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 				\ini_set('display_errors', 'Off');
 			}
 		}
