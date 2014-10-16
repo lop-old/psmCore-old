@@ -74,14 +74,14 @@ if(!function_exists('dd')) {
 
 
 function ExitNow($code=NULL) {
-	\psm\portal::hasRendered(TRUE);
+	\psm\portal::get()->hasRendered(TRUE);
 	if($code !== NULL)
 		exit($code);
 	exit(1);
 }
 function fail($msg) {
 	echo '<pre style="color: black; background-color: #ffaaaa; padding: 10px;"><font size="+2">FATAL: '.$msg.'</font></pre>';
-	if(\psm\portal::get()->debug())
+	if(\psm\debug())
 		backtrace();
 	ExitNow(1);
 }
