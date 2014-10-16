@@ -5,8 +5,9 @@ class manager implements \psm\engine {
 
 	private static $instance = NULL;
 
-	private $head;
-	private $body;
+	public $render = NULL;
+	public $head = NULL;
+	public $body = NULL;
 
 	private $rendered = FALSE;
 
@@ -19,8 +20,8 @@ class manager implements \psm\engine {
 		return self::$instance;
 	}
 	protected function __construct() {
-		$this->head = engine_head::get();
-		$this->body = engine_block::get('body');
+		$this->head = \psm\engine\engine_head::get();
+		$this->body = \psm\engine\engine_block::get('body');
 	}
 
 
@@ -37,17 +38,9 @@ class manager implements \psm\engine {
 	public function render() {
 		if($this->hasRendered()) return;
 		$this->hasRendered(TRUE);
-		// ensure website has loaded
-		\psm\portal::get()->getWebsite();
-		// header
-		$this->head->render();
-		// body
-		echo '<body>'.NEWLINE
-			.NEWLINE.NEWLINE;
-		$this->body->render();
-		echo NEWLINE.NEWLINE
-			.'</body>'.NEWLINE
-			.'</html>'.NEWLINE;
+		if($this->render == NULL)
+			$this->render = new \psm\engine\render();
+		$this->render->render();
 	}
 
 
