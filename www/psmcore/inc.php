@@ -48,110 +48,6 @@ try {
 
 
 // ==================================================
-// debug
-
-define('psm\\DEBUG_COOKIE', 'psm_debug');
-
-
-
-/*
-// Kint backtracer
-if(file_exists(\psm\Paths::getLocal('portal').DIR_SEP.'kint.php')) {
-	include(\psm\Paths::getLocal('portal').DIR_SEP.'kint.php');
-}
-// php_error
-if(file_exists(\psm\Paths::getLocal('portal').DIR_SEP.'php_error.php')) {
-	include(\psm\Paths::getLocal('portal').DIR_SEP.'php_error.php');
-}
-// Kint backtracer
-$kintPath = \psm\Paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'kint'.DIR_SEP.'Kint.class.php';
-if(file_exists($kintPath)) {
-	//global $GLOBALS;
-	//if(!@is_array(@$GLOBALS)) $GLOBALS = array();
-	//$_kintSettings = &$GLOBALS['_kint_settings'];
-	//$_kintSettings['traceCleanupCallback'] = function($traceStep) {
-	//echo '<pre>';print_r($traceStep);exit();
-	//	if(isset($traceStep['class']) && $traceStep['class'] === 'Kint')
-	//		return null;
-	//	if(isset($traceStep['function']) && \strtolower($traceStep['function']) === '__tostring')
-	//		$traceStep['function'] = '[object converted to string]';
-	//	return $traceStep;
-	//};
-	//echo '<pre>';print_r($_kintSettings);exit();
-	include($kintPath);
-	}
-	// php_error
-	$phpErrorPath = \psm\Paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'php_error.php';
-	if(file_exists($phpErrorPath))
-		include($phpErrorPath);
-		if(function_exists('php_error\\reportErrors')) {
-			$reportErrors = '\\php_error\\reportErrors';
-			$reportErrors(array(
-					'catch_ajax_errors'      => TRUE,
-					'catch_supressed_errors' => FALSE,
-					'catch_class_not_found'  => FALSE,
-					'snippet_num_lines'      => 11,
-					'application_root'       => __DIR__,
-					'background_text'        => 'PSM',
-			));
-		}
-	}
-}
-*/
-
-
-
-// debug mode
-global $PSM_DEBUG;
-$PSM_DEBUG = NULL;
-function debug($debug=NULL) {
-	global $PSM_DEBUG;
-	if($debug !== NULL) {
-		$last = $PSM_DEBUG;
-		$PSM_DEBUG = \psm\utils\vars::toBoolean($debug);
-		// update debug mode
-		if($PSM_DEBUG != $last) {
-			// enabled
-			if($PSM_DEBUG) {
-				\error_reporting(\E_ALL | \E_STRICT);
-				\ini_set('display_errors', 'On');
-				\ini_set('html_errors',    'On');
-			// disabled
-			} else {
-				\error_reporting(0);
-				\ini_set('display_errors', 'Off');
-			}
-		}
-	}
-	// default to false
-	if($PSM_DEBUG === NULL)
-		debug(FALSE);
-	return $PSM_DEBUG;
-}
-// by define
-if(defined('\DEBUG'))
-	debug(\DEBUG);
-if(defined('psm\\DEBUG'))
-	debug(\psm\DEBUG);
-// by url
-$val = \psm\utils\vars::getVar('debug', 'bool');
-if($val !== NULL) {
-	// set cookie
-	\setcookie(\psm\DEBUG_COOKIE, ($val ? '1' : '0'), 0);
-	debug($val);
-} else {
-	// from cookie
-	$val = \psm\utils\vars::getVar(\psm\DEBUG_COOKIE, 'bool', 'cookie');
-	if($val === TRUE)
-		debug($val);
-}
-unset($val);
-// ensure inited
-debug();
-
-
-
-// ==================================================
 // global functions
 
 
@@ -253,6 +149,110 @@ function backtrace() {
 
 }
 namespace psm {
+
+
+
+// ==================================================
+// debug
+
+define('psm\\DEBUG_COOKIE', 'psm_debug');
+
+
+
+/*
+// Kint backtracer
+if(file_exists(\psm\Paths::getLocal('portal').DIR_SEP.'kint.php')) {
+	include(\psm\Paths::getLocal('portal').DIR_SEP.'kint.php');
+}
+// php_error
+if(file_exists(\psm\Paths::getLocal('portal').DIR_SEP.'php_error.php')) {
+	include(\psm\Paths::getLocal('portal').DIR_SEP.'php_error.php');
+}
+// Kint backtracer
+$kintPath = \psm\Paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'kint'.DIR_SEP.'Kint.class.php';
+if(file_exists($kintPath)) {
+	//global $GLOBALS;
+	//if(!@is_array(@$GLOBALS)) $GLOBALS = array();
+	//$_kintSettings = &$GLOBALS['_kint_settings'];
+	//$_kintSettings['traceCleanupCallback'] = function($traceStep) {
+	//echo '<pre>';print_r($traceStep);exit();
+	//	if(isset($traceStep['class']) && $traceStep['class'] === 'Kint')
+	//		return null;
+	//	if(isset($traceStep['function']) && \strtolower($traceStep['function']) === '__tostring')
+	//		$traceStep['function'] = '[object converted to string]';
+	//	return $traceStep;
+	//};
+	//echo '<pre>';print_r($_kintSettings);exit();
+	include($kintPath);
+	}
+	// php_error
+	$phpErrorPath = \psm\Paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'php_error.php';
+	if(file_exists($phpErrorPath))
+		include($phpErrorPath);
+		if(function_exists('php_error\\reportErrors')) {
+			$reportErrors = '\\php_error\\reportErrors';
+			$reportErrors(array(
+					'catch_ajax_errors'      => TRUE,
+					'catch_supressed_errors' => FALSE,
+					'catch_class_not_found'  => FALSE,
+					'snippet_num_lines'      => 11,
+					'application_root'       => __DIR__,
+					'background_text'        => 'PSM',
+			));
+		}
+	}
+}
+*/
+
+
+
+// debug mode
+global $PSM_DEBUG;
+$PSM_DEBUG = NULL;
+function debug($debug=NULL) {
+	global $PSM_DEBUG;
+	if($debug !== NULL) {
+		$last = $PSM_DEBUG;
+		$PSM_DEBUG = \psm\utils\vars::toBoolean($debug);
+		// update debug mode
+		if($PSM_DEBUG != $last) {
+			// enabled
+			if($PSM_DEBUG) {
+				\error_reporting(\E_ALL | \E_STRICT);
+				\ini_set('display_errors', 'On');
+				\ini_set('html_errors',    'On');
+			// disabled
+			} else {
+				\error_reporting(0);
+				\ini_set('display_errors', 'Off');
+			}
+		}
+	}
+	// default to false
+	if($PSM_DEBUG === NULL)
+		debug(FALSE);
+	return $PSM_DEBUG;
+}
+// by define
+if(defined('\DEBUG'))
+	debug(\DEBUG);
+if(defined('psm\\DEBUG'))
+	debug(\psm\DEBUG);
+// by url
+$val = \psm\utils\vars::getVar('debug', 'bool');
+if($val !== NULL) {
+	// set cookie
+	\setcookie(\psm\DEBUG_COOKIE, ($val ? '1' : '0'), 0);
+	debug($val);
+} else {
+	// from cookie
+	$val = \psm\utils\vars::getVar(\psm\DEBUG_COOKIE, 'bool', 'cookie');
+	if($val === TRUE)
+		debug($val);
+}
+unset($val);
+// ensure inited
+debug();
 
 
 
