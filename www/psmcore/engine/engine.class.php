@@ -29,8 +29,8 @@ class engine implements \psm\engine\engine_interface {
 	public function addHeader($html) {
 		$this->head->add($html);
 	}
-	public function add($html) {
-		$this->body->add($html);
+	public function add($html, $name=NULL) {
+		$this->body->add($html, $name);
 	}
 
 

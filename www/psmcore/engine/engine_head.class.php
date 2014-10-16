@@ -25,10 +25,13 @@ class engine_head implements \psm\engine\engine_interface {
 
 
 
-	public function add($html) {
+	public function add($html, $name=NULL) {
 		$data = \trim($html);
 		if(empty($data)) return;
-		$this->content[] = &$data;
+		if(empty($name))
+			$this->content[] = &$data;
+		else
+			$this->content[$name] = &$data;
 	}
 
 
@@ -61,10 +64,13 @@ class engine_head implements \psm\engine\engine_interface {
 				echo '<script src="'.$file.'"></script>'.NEWLINE;
 			}
 		}
-		foreach($this->content as $chunk)
+		foreach($this->content as $name => $chunk) {
+			if(\is_string($name))
+				echo '<!-- '.$name.' -->'.NEWLINE;
 			echo NEWLINE.NEWLINE.
 				$chunk.NEWLINE.
 				NEWLINE.NEWLINE;
+		}
 		echo '</head>'.NEWLINE.NEWLINE;
 	}
 
@@ -91,25 +97,25 @@ class engine_head implements \psm\engine\engine_interface {
 
 
 
-	public function css($code) {
+	public function css($code, $name=NULL) {
 		$data = \trim($code);
 		if(empty($data)) return;
-		$this->content[] =
-				NEWLINE.NEWLINE.
-				'<style type="text/css"><!--'.NEWLINE.
-				$data.NEWLINE.
-				'--></style>'.NEWLINE.
-				NEWLINE.NEWLINE;
+		$this->add(
+			'<style type="text/css"><!--'.NEWLINE.
+			$data.NEWLINE.
+			'--></style>',
+			$name
+		);
 	}
-	public function js($code) {
+	public function js($code, $name=NULL) {
 		$data = \trim($code);
 		if(empty($data)) return;
-		$this->content[] =
-				NEWLINE.NEWLINE.
-				'<script type="text/javascript"><!--//'.NEWLINE.
-				$data.NEWLINE.
-				'//--></script>'.NEWLINE.
-				NEWLINE.NEWLINE;
+		$this->add(
+			'<script type="text/javascript"><!--//'.NEWLINE.
+			$data.NEWLINE.
+			'//--></script>',
+			$name
+		);
 	}
 
 

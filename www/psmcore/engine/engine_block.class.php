@@ -29,18 +29,24 @@ class engine_block implements \psm\engine\engine_interface {
 
 
 
-	public function add($html) {
+	public function add($html, $name=NULL) {
 		$data = \trim($html);
 		if(empty($data)) return;
-		$this->content[] = &$data;
+		if(empty($name))
+			$this->content[] = &$data;
+		else
+			$this->content[$name] = &$data;
 	}
 
 
 
 	public function render() {
-		foreach($this->content as $chunk)
+		foreach($this->content as $name => $chunk) {
+			if(\is_string($name))
+				echo '<!-- '.$name.' -->'.NEWLINE;
 			echo $chunk.NEWLINE.
 				NEWLINE.NEWLINE;
+		}
 	}
 
 

@@ -4,7 +4,7 @@ if(!defined('psm\\INDEX_DEFINE') || \psm\INDEX_DEFINE !== TRUE) { echo '<header>
 interface engine_interface {
 
 
-	public function add($html);
+	public function add($html, $name=NULL);
 
 	public function render();
 
