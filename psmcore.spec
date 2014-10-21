@@ -57,36 +57,36 @@ echo "Install.."
 %{__rm} -fv "%{_rpmdir}/%{name}"*.noarch.rpm
 # create directories
 %{__install} -d -m 0755 \
-	"${RPM_BUILD_ROOT}%{prefix}/db" \
-	"${RPM_BUILD_ROOT}%{prefix}/engine" \
-	"${RPM_BUILD_ROOT}%{prefix}/portal" \
-	"${RPM_BUILD_ROOT}%{prefix}/utils" \
-	"${RPM_BUILD_ROOT}%{prefix}/website" \
+	"${RPM_BUILD_ROOT}%{prefix}/db"       \
+	"${RPM_BUILD_ROOT}%{prefix}/engine"   \
+	"${RPM_BUILD_ROOT}%{prefix}/portal"   \
+	"${RPM_BUILD_ROOT}%{prefix}/utils"    \
+	"${RPM_BUILD_ROOT}%{prefix}/website"  \
 	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/" \
-	"${RPM_BUILD_ROOT}/etc/php.d/" \
+	"${RPM_BUILD_ROOT}/etc/php.d/"        \
 		|| exit 1
 # copy .php files
 for phpfile in \
-	'core.php' \
-	'inc.php' \
-	'ClassLoader.php' \
-	'config.php.original' \
-	'engine/engine.class.php' \
-	'engine/render.class.php' \
+	'core.php'                          \
+	'inc.php'                           \
+	'ClassLoader.php'                   \
+	'config.php.original'               \
+	'engine/engine.class.php'           \
+	'engine/render.class.php'           \
 	'engine/engine_interface.class.php' \
-	'engine/engine_block.class.php' \
-	'engine/engine_head.class.php' \
-	'engine/phpclss.class.php' \
-	'engine/tpl.class.php' \
-	'portal/portal.class.php' \
-	'portal/module.class.php' \
-	'utils/utils.class.php' \
-	'utils/csrf.class.php' \
-	'utils/numbers.class.php' \
-	'utils/PassCrypt.class.php' \
-	'utils/san.class.php' \
-	'utils/vars.class.php' \
-	'website/website.class.php' \
+	'engine/engine_block.class.php'     \
+	'engine/engine_head.class.php'      \
+	'engine/phpclss.class.php'          \
+	'engine/tpl.class.php'              \
+	'portal/portal.class.php'           \
+	'portal/module.class.php'           \
+	'utils/utils.class.php'             \
+	'utils/csrf.class.php'              \
+	'utils/numbers.class.php'           \
+	'utils/PassCrypt.class.php'         \
+	'utils/san.class.php'               \
+	'utils/vars.class.php'              \
+	'website/website.class.php'         \
 ; do
 	%{__install} -m 0555 \
 		"%{sourceroot}/www/psmcore/${phpfile}" \
