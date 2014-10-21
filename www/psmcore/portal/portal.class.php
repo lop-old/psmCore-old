@@ -23,7 +23,7 @@ class portal {
 	// get portal
 	public static function get() {
 		if(self::$instance == NULL)
-			self::$instance = new self();
+			new self();
 		return self::$instance;
 	}
 	// new portal instance
@@ -33,6 +33,7 @@ class portal {
 			exit(1);
 		}
 		define('psm\\PORTAL_LOADED', TRUE);
+		self::$instance = $this;
 		\psm\utils::NoPageCache();
 		// forced settings
 //		if(defined('psm\\MODULE'))
