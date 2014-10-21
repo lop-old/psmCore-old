@@ -1,15 +1,15 @@
 <?php
 
 
-\psm\db\drivers\driver_mysql::add(array(
-	'name' => 'main',
-	'host' => 'localhost',
-	'port' => 3306,
-	'user' => 'user',
-	'pass' => 'pass123',
-	'database' => 'psm_website',
-	'table prefix' => 'psm_',
-));
+\psm\pxdb::add_mysql(
+	/* name     */  'main',
+	/* host     */  'localhost',
+	/* port     */  3306,
+	/* user     */  'pxn',
+	/* pass     */  'pass123',
+	/* database */  'psm_website',
+	/* prefix   */  'psm_'
+);
 
 
 ?>
