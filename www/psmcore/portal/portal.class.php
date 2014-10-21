@@ -42,6 +42,9 @@ class portal {
 //		$this->engine = \psm\engine::get();
 		// shutdown hook
 		\register_shutdown_function('psm\\portal::shutdown');
+		// load configs
+		self::ScanConfigs(paths::entry());
+		self::ScanConfigs(paths::core());
 	}
 
 
@@ -93,6 +96,27 @@ class portal {
 			if($this->website == NULL)
 				fail('Failed to create a new website instance: '.$clss);
 		}
+	}
+
+
+
+	public static function ScanConfigs($dir) {
+		$portal = self::get();
+		// get directory contents
+		$array = \scandir($dir, SCANDIR_SORT_NONE);
+		foreach($array as $entry) {
+			if(empty($entry) || substr($entry, 0, 1) === '.') continue;
+			// is dir
+			if(\is_dir($dir.DIR_SEP.$entry)) continue;
+			// ends with config.php
+			if(!\psm\utils\strings::EndsWith($entry, 'config.php', TRUE)) continue;
+			// path to config.php file
+			$file = $dir.DIR_SEP.$entry;
+			if(!\is_file($file)) continue;
+			// include the config file
+			include_once($file);
+		}
+		unset($portal);
 	}
 
 
