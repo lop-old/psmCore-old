@@ -53,9 +53,8 @@ class portal {
 	public static function shutdown() {
 		$portal = self::get();
 		// hasn't rendered yet, do it now
-		if(!$portal->hasRendered()) {
+		if(!$portal->hasRendered())
 			$portal->render();
-		}
 		unset($portal);
 	}
 
@@ -128,7 +127,7 @@ class portal {
 
 
 	public function hasRendered($rendered=NULL) {
-		return \psm\engine::get()->hasRendered();
+		return \psm\engine::get()->hasRendered($rendered);
 	}
 	public function render() {
 		\psm\engine::get()->render();
