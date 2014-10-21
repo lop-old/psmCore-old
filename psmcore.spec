@@ -82,7 +82,7 @@ for phpfile in \
 	'portal/module.class.php'           \
 	'portal/website.class.php'          \
 	'pxdb/dbPool.class.php'             \
-	'pxdb/dbPrepared.class.php'         \
+	'pxdb/dbQuery.class.php'            \
 	'pxdb/pxdb.class.php'               \
 	'utils/csrf.class.php'              \
 	'utils/numbers.class.php'           \
@@ -136,7 +136,7 @@ fi
 %{prefix}/portal/module.class.php
 %{prefix}/portal/website.class.php
 %{prefix}/pxdb/dbPool.class.php
-%{prefix}/pxdb/dbPrepared.class.php
+%{prefix}/pxdb/dbQuery.class.php
 %{prefix}/pxdb/pxdb.class.php
 %{prefix}/utils/csrf.class.php
 %{prefix}/utils/numbers.class.php
