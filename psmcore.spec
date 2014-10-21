@@ -60,8 +60,8 @@ echo "Install.."
 	"${RPM_BUILD_ROOT}%{prefix}/db"       \
 	"${RPM_BUILD_ROOT}%{prefix}/engine"   \
 	"${RPM_BUILD_ROOT}%{prefix}/portal"   \
+	"${RPM_BUILD_ROOT}%{prefix}/pxdb"     \
 	"${RPM_BUILD_ROOT}%{prefix}/utils"    \
-	"${RPM_BUILD_ROOT}%{prefix}/website"  \
 	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/" \
 	"${RPM_BUILD_ROOT}/etc/php.d/"        \
 		|| exit 1
@@ -80,13 +80,17 @@ for phpfile in \
 	'engine/tpl.class.php'              \
 	'portal/portal.class.php'           \
 	'portal/module.class.php'           \
-	'utils/utils.class.php'             \
+	'portal/website.class.php'          \
+	'pxdb/dbPool.class.php'             \
+	'pxdb/dbPrepared.class.php'         \
+	'pxdb/pxdb.class.php'               \
 	'utils/csrf.class.php'              \
 	'utils/numbers.class.php'           \
 	'utils/PassCrypt.class.php'         \
 	'utils/san.class.php'               \
+	'utils/strings.class.php'           \
+	'utils/utils.class.php'             \
 	'utils/vars.class.php'              \
-	'website/website.class.php'         \
 ; do
 	%{__install} -m 0555 \
 		"%{sourceroot}/www/psmcore/${phpfile}" \
@@ -130,13 +134,17 @@ fi
 %{prefix}/engine/tpl.class.php
 %{prefix}/portal/portal.class.php
 %{prefix}/portal/module.class.php
-%{prefix}/utils/utils.class.php
+%{prefix}/portal/website.class.php
+%{prefix}/pxdb/dbPool.class.php
+%{prefix}/pxdb/dbPrepared.class.php
+%{prefix}/pxdb/pxdb.class.php
 %{prefix}/utils/csrf.class.php
 %{prefix}/utils/numbers.class.php
 %{prefix}/utils/PassCrypt.class.php
 %{prefix}/utils/san.class.php
+%{prefix}/utils/strings.class.php
+%{prefix}/utils/utils.class.php
 %{prefix}/utils/vars.class.php
-%{prefix}/website/website.class.php
 /etc/httpd/conf.d/psmcore.conf
 /etc/php.d/psmcore.ini
 
