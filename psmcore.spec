@@ -57,11 +57,12 @@ echo "Install.."
 %{__rm} -fv "%{_rpmdir}/%{name}"*.noarch.rpm
 # create directories
 %{__install} -d -m 0755 \
-	"${RPM_BUILD_ROOT}%{prefix}/db"       \
 	"${RPM_BUILD_ROOT}%{prefix}/engine"   \
+	"${RPM_BUILD_ROOT}%{prefix}/engine/template" \
 	"${RPM_BUILD_ROOT}%{prefix}/portal"   \
 	"${RPM_BUILD_ROOT}%{prefix}/pxdb"     \
 	"${RPM_BUILD_ROOT}%{prefix}/utils"    \
+	"${RPM_BUILD_ROOT}%{prefix}/widgets"  \
 	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/" \
 	"${RPM_BUILD_ROOT}/etc/php.d/"        \
 		|| exit 1
@@ -72,12 +73,10 @@ for phpfile in \
 	'ClassLoader.php'                   \
 	'config.php.original'               \
 	'engine/engine.class.php'           \
-	'engine/render.class.php'           \
-	'engine/engine_interface.class.php' \
 	'engine/engine_block.class.php'     \
-	'engine/engine_head.class.php'      \
-	'engine/phpclss.class.php'          \
-	'engine/tpl.class.php'              \
+	'engine/template/template_interface.class.php' \
+	'engine/template/phpclss.class.php' \
+	'engine/template/tpl.class.php'     \
 	'portal/portal.class.php'           \
 	'portal/module.class.php'           \
 	'portal/website.class.php'          \
@@ -126,12 +125,10 @@ fi
 %{prefix}/ClassLoader.php
 %{prefix}/config.php.original
 %{prefix}/engine/engine.class.php
-%{prefix}/engine/render.class.php
-%{prefix}/engine/engine_interface.class.php
 %{prefix}/engine/engine_block.class.php
-%{prefix}/engine/engine_head.class.php
-%{prefix}/engine/phpclss.class.php
-%{prefix}/engine/tpl.class.php
+%{prefix}/engine/template/template_interface.class.php
+%{prefix}/engine/template/phpclss.class.php
+%{prefix}/engine/template/tpl.class.php
 %{prefix}/portal/portal.class.php
 %{prefix}/portal/module.class.php
 %{prefix}/portal/website.class.php
