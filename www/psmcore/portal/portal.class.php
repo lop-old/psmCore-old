@@ -10,6 +10,7 @@ class portal {
 	// website modules
 	private static $available = array();
 	private $website = NULL;
+	private $rendered = FALSE;
 
 	// page
 	private $pageStr = NULL;
@@ -95,6 +96,7 @@ class portal {
 			if($this->website == NULL)
 				fail('Failed to create a new website instance: '.$clss);
 		}
+		return $this->website;
 	}
 
 
@@ -127,10 +129,13 @@ class portal {
 
 
 	public function hasRendered($rendered=NULL) {
-		return \psm\engine::get()->hasRendered($rendered);
+		if($rendered != NULL)
+			$this->rendered = \psm\utils\vars::toBoolean($rendered);
+		return $this->rendered;
 	}
 	public function render() {
-		\psm\engine::get()->render();
+		$this->getWebsite()
+				->render();
 	}
 
 
