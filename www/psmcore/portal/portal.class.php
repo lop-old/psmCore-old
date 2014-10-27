@@ -98,6 +98,10 @@ class portal {
 		}
 		return $this->website;
 	}
+	public function site() {
+		return $this->getWebsite()
+				->siteName();
+	}
 
 
 
