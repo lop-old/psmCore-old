@@ -22,6 +22,8 @@ class engine {
 
 	// body content
 	public $body = array();
+	public $mainpre  = NULL;
+	public $mainpost = NULL;
 
 
 
@@ -116,6 +118,15 @@ class engine {
 
 
 
+	public function setMain($html) {
+		if(\strpos($html, '{content}') === FALSE)
+			$this->mainpre = $html;
+		else
+			list($this->mainpre, $this->mainpost) = \explode('{content}', $html, 2);
+	}
+
+
+
 	public function render_head() {
 		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" '.
 				'"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.NEWLINE;
@@ -178,6 +189,9 @@ class engine {
 		echo NEWLINE.NEWLINE.
 				'<body>'.NEWLINE.
 				NEWLINE.NEWLINE;
+		if(!empty($this->mainpre))
+			echo $this->mainpre.NEWLINE.
+					NEWLINE.NEWLINE;
 		foreach($this->body as $name => $chunk) {
 			echo NEWLINE.NEWLINE;
 			if(\is_string($name))
@@ -185,6 +199,9 @@ class engine {
 			echo $chunk.NEWLINE.
 					NEWLINE.NEWLINE;
 		}
+		if(!empty($this->mainpost))
+			echo NEWLINE.NEWLINE.
+					$this->mainpost.NEWLINE;
 		echo NEWLINE.NEWLINE.
 				'</body>'.NEWLINE.
 				'</html>'.NEWLINE;
