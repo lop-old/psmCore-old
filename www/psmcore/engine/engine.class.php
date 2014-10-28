@@ -193,7 +193,7 @@ class engine {
 		if(!empty($this->jsfiles)) {
 			foreach($this->jsfiles as $file) {
 				if(empty($file)) continue;
-				echo '<script src="'.$file.'"></script>'.NEWLINE;
+				echo '<script type="text/javascript" src="'.$file.'"></script>'.NEWLINE;
 			}
 		}
 		// css content
@@ -201,21 +201,13 @@ class engine {
 			echo NEWLINE.NEWLINE;
 			if(\is_string($name))
 				echo '<!-- '.$name.' -->'.NEWLINE;
-			echo $chunk.NEWLINE.
+			echo '<style type="text/css">'.NEWLINE.
+					$chunk.NEWLINE.
+					'</style>'.NEWLINE.
 					NEWLINE.NEWLINE;
 		}
 		// js content
 		foreach($this->js as $name => $chunk) {
-			echo NEWLINE.NEWLINE;
-			if(\is_string($name))
-				echo '<!-- '.$name.' -->'.NEWLINE;
-			echo '<style type="text/css"><!--//'.NEWLINE.
-					$chunk.NEWLINE.
-					'//--></style>'.NEWLINE.
-					NEWLINE.NEWLINE;
-		}
-		// header content
-		foreach($this->head as $name => $chunk) {
 			echo NEWLINE.NEWLINE;
 			if(\is_string($name))
 				echo '<!-- '.$name.' -->'.NEWLINE;
@@ -224,11 +216,20 @@ class engine {
 					'//--></script>'.NEWLINE.
 					NEWLINE.NEWLINE;
 		}
-		echo '</head>'.NEWLINE.NEWLINE;
+		// header content
+		foreach($this->head as $name => $chunk) {
+			echo NEWLINE.NEWLINE;
+			if(\is_string($name))
+				echo '<!-- '.$name.' -->'.NEWLINE;
+			echo $chunk.NEWLINE.
+					NEWLINE.NEWLINE;
+		}
+		echo '</head>'.NEWLINE;
 	}
 	public function render_body() {
-		echo NEWLINE.NEWLINE.
+		echo NEWLINE.
 				'<body>'.NEWLINE.
+				'<!-- ~~~~~~~~~~~~~~~~~~~~ -->'.NEWLINE.
 				NEWLINE.NEWLINE;
 		if(!empty($this->mainpre))
 			echo $this->mainpre.NEWLINE.
