@@ -130,6 +130,24 @@ final class strings {
 
 
 
+	public static function getBetween(&$data, $first, $second, $remove=TRUE) {
+		$pos1 = \strpos($data, $first);
+		if($pos1 === FALSE) return NULL;
+		$pos2 = \strpos($data, $second, $pos1);
+		if($pos2 === FALSE) return NULL;
+		$out = \substr(
+			$data,
+			$pos1 + \strlen($first),
+			$pos2 - ($pos1 + \strlen($first))
+		);
+		if($remove)
+			$data = \substr($data, 0, $pos1).
+					\substr($data, $pos2 + \strlen($second));
+		return $out;
+	}
+
+
+
 	public static function StartsWith($haystack, $needle, $ignoreCase=FALSE) {
 		if(empty($haystack) || empty($needle))
 			return FALSE;
