@@ -105,7 +105,7 @@ class engine {
 
 
 
-	public function css($code, $name) {
+	public function css($code, $name=NULL) {
 		$data = \trim($code);
 		if(empty($data)) return;
 		if(empty($name))
@@ -113,7 +113,7 @@ class engine {
 		else
 			$this->css[$name] = $data;
 	}
-	public function js($code, $name) {
+	public function js($code, $name=NULL) {
 		$data = \trim($code);
 		if(empty($data)) return;
 		if(empty($name))
