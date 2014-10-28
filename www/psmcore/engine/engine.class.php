@@ -40,18 +40,56 @@ class engine {
 
 
 	public static function load($file) {
-		if(!\file_exists($file)) {
-			Fail('File not found: '.$file);
+		// exact match
+		if(\file_exists($file))
+			return self::load_file_exact($file);
+		// entry location - /
+		$data = self::load_file(
+			paths::entry().'/'.
+			$file
+		);
+		if($data != NULL) return $data;
+		// entry site - site/html/
+		$site = \psm\portal::get()->getWebsite()->siteName();
+		$data = self::load_file(
+			paths::entry().'/'.
+			$site.'/'.
+			'html/'.
+			$file
+		);
+		if($data != NULL) return $data;
+		// core location - psmcore/html/
+		$data = self::load_file(
+			paths::core().'/'.
+			'html/'.
+			$file
+		);
+		if($data != NULL) return $data;
+		// not found
+		fail('File not found: '.$file);
+		return NULL;
+	}
+	public static function load_file($file) {
+		// exact match
+		if(\file_exists($file))
+			return self::load_file_exact($file);
+		// .tpl
+		$data = self::load_file_exact($file.'.tpl');
+		if($data != NULL) return $data;
+		// .tpl.php
+		$data = self::load_file_exact($file.'.tpl.php');
+		if($data != NULL) return $data;
+		// not found
+		return NULL;
+	}
+	public static function load_file_exact($file) {
+		if(!\file_exists($file))
 			return NULL;
-		}
 		$data = \file_get_contents($file);
-		if($data == NULL) {
-			Fail('Failed to load file: '.$file);
-			return NULL;
-		}
-//		return new \psm\engine\engine_block(
-//			$data
-//		);
+		if($data != NULL)
+			return $data;
+		fail('Failed to load file: '.$file);
+		return NULL;
 	}
 
 
