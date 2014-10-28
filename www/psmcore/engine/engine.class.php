@@ -251,6 +251,27 @@ class engine {
 
 
 
+	public static function parseTags(&$data, $tags=NULL) {
+//		if($tags == NULL)
+//			$tags = array(
+//				'' => '',
+//			);
+		// {css} {/css}
+		while(TRUE) {
+			$part = \psm\utils\strings::getBetween($data, '{css}', '{/css}', TRUE);
+			if($part === NULL) break;
+			self::get()->css($part);
+		}
+		// {js} {/js}
+		while(TRUE) {
+			$part = \psm\utils\strings::getBetween($data, '{js}', '{/js}', TRUE);
+			if($part === NULL) break;
+			self::get()->js($part);
+		}
+	}
+
+
+
 	public static function getVersion() {
 		$vers = \psm\portal::get()->version();
 		$pos = strrpos($vers, '.');
