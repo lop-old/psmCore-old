@@ -133,8 +133,12 @@ class engine {
 		// includes list
 		$this->jsfiles[] = $file;
 	}
+
+
+
 	// 3rd party libraries
 	public function usingBootstrap() {
+		$this->usingjQuery();
 		$this->cssFile(self::BOOTSTRAP_CSS);
 		$this->jsFile( self::BOOTSTRAP_JS);
 	}
