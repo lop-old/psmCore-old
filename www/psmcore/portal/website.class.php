@@ -8,6 +8,8 @@ abstract class website {
 	public abstract function siteName();
 	public abstract function siteTitle($title=NULL);
 
+	public abstract function loadPage();
+
 
 
 	public function render() {

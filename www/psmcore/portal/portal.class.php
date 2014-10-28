@@ -53,6 +53,8 @@ class portal {
 	// shutdown hook
 	public static function shutdown() {
 		$portal = self::get();
+		$website = $portal->getWebsite();
+		$website->loadPage();
 		// hasn't rendered yet, do it now
 		if(!$portal->hasRendered())
 			$portal->render();
