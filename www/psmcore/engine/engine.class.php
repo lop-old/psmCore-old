@@ -170,18 +170,18 @@ class engine {
 
 
 	public function render_head() {
-		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" '.
-				'"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.NEWLINE;
+		echo '<!DOCTYPE html>'.NEWLINE;
 		echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">'.NEWLINE;
 		echo '<head>'.NEWLINE.
+				'<meta charset="UTF-8" />'.NEWLINE.
+				'<base href="//'.(empty($_SERVER['HTTP_HOST']) ? @$_SERVER['SERVER_NAME'] : @$_SERVER['HTTP_HOST']).'" />'.NEWLINE.
 				'<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />'.NEWLINE.
 				'<meta name="viewport" content="width=device-width, initial-scale=1" />'.NEWLINE.
-				'<meta name="GOOGLEBOT" content="index,follow" />'.NEWLINE.
-				'<meta name="language" content="EN-US" />'.NEWLINE;
-		echo '<title>'.(empty($this->title) ? '' : $this->title).'</title>'.NEWLINE;
+				'<meta name="GOOGLEBOT" content="index,follow" />'.NEWLINE;
+		echo '<title>'.(empty($this->title) ? ' ' : $this->title).'</title>'.NEWLINE;
 		if(!empty($this->description))
 			echo '<meta name="Description" content="'.$this->description.'" />'.NEWLINE;
-		echo '<meta name="generator" content="ProSiteManager Core '.self::getVersion().'" />'.NEWLINE;
+		echo '<meta name="generator" content="psmCore '.self::getVersion().'" />'.NEWLINE;
 		// include css files
 		if(!empty($this->cssfiles)) {
 			foreach($this->cssfiles as $file) {
