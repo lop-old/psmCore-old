@@ -196,6 +196,9 @@ class engine {
 				echo '<script type="text/javascript" src="'.$file.'"></script>'.NEWLINE;
 			}
 		}
+		// debug mode
+		if(!\psm\debug())
+			$this->css('.debug {'.NEWLINE.TAB.'display: none;'.NEWLINE.'}');
 		// css content
 		foreach($this->css as $name => $chunk) {
 			echo NEWLINE.NEWLINE;
