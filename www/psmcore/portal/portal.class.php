@@ -13,9 +13,7 @@ class portal {
 	private $rendered = FALSE;
 
 	// page
-	private $pageStr = NULL;
 	private $page = NULL;
-	private $pageDefault = 'home';
 	// action
 	private $action = NULL;
 
@@ -36,6 +34,13 @@ class portal {
 		define('psm\\PORTAL_LOADED', TRUE);
 		self::$instance = $this;
 		\psm\utils::NoPageCache();
+		// get page/action from url
+		{
+			$page   = \psm\utils\vars::getVar('page',   'str');
+			$action = \psm\utils\vars::getVar('action', 'str');
+			$this->page   = \psm\utils\san::Filename($page);
+			$this->action = \psm\utils\san::Filename($action);
+		}
 		// forced settings
 //		if(defined('psm\\MODULE'))
 //		if(defined('psm\\PAGE'))
@@ -54,6 +59,7 @@ class portal {
 	public static function shutdown() {
 		$portal = self::get();
 		$website = $portal->getWebsite();
+		$website->loadMain();
 		$website->loadPage();
 		// hasn't rendered yet, do it now
 		if(!$portal->hasRendered())
@@ -103,6 +109,15 @@ class portal {
 	public function site() {
 		return $this->getWebsite()
 				->siteName();
+	}
+
+
+
+	public function page() {
+		return $this->page;
+	}
+	public function action() {
+		return $this->action;
 	}
 
 
