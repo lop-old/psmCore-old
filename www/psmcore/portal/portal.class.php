@@ -48,6 +48,8 @@ class portal {
 //		$this->engine = \psm\engine::get();
 		// shutdown hook
 		\register_shutdown_function('psm\\portal::shutdown');
+		// capture output buffer
+		ob_start();
 		// load configs
 		self::ScanConfigs(paths::entry());
 		self::ScanConfigs(paths::core());
@@ -62,7 +64,9 @@ class portal {
 		$website->loadMain();
 		$website->loadPage();
 		// hasn't rendered yet, do it now
-		if(!$portal->hasRendered())
+		if($portal->hasRendered())
+			\ob_end_flush();
+		else
 			$portal->render();
 		unset($portal);
 	}

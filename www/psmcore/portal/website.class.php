@@ -18,6 +18,11 @@ abstract class website {
 	public function render() {
 		if(\psm\portal::get()->hasRendered()) return;
 		\psm\portal::get()->hasRendered(TRUE);
+		// stop output buffering
+		\psm\engine::get()
+			->add(\ob_get_contents());
+		\ob_end_clean();
+		// start rendering
 		$this->render_head();
 		$this->render_body();
 	}
