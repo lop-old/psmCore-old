@@ -25,6 +25,23 @@ abstract class website {
 		\psm\engine::get()
 				->render_body();
 	}
+	public function add($html, $name=NULL) {
+		\psm\engine::get()
+			->add($html, $name);
+	}
+
+
+
+	public function page() {
+		$page = \psm\portal::get()->page();
+		if(!empty($page))
+			return $page;
+		return $this->defaultPage();
+	}
+	public function action() {
+		return \psm\portal::get()
+			->action();
+	}
 //	public function page_content() {
 //		echo '&lt; PAGE &gt;';
 //	}
