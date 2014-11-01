@@ -21,14 +21,11 @@ final class san {
 		// hidden file, contains . dot
 		if(\psm\utils\strings::StartsWith($filename, '.'))
 			fail('Invalid file name, cannot start with . dot in '.$filename);
-		// invalid characters
-		//if(strlen(preg_replace('/([[:alnum:]\(\)_\.\'& +?=-]*)/', '', $filename)) > 0)
-		//	fail('Invalid file name, contains illegal characters '.$filename);
-		//return $filename;
-		$newname = str_replace(str_split(preg_replace('/([[:alnum:]\(\)_\.\'& +?=-]*)/', '_', $filename)), '_', $filename);
-		$newname = str_replace('..', '', $newname);
+		// remove invalid characters
+		$filter = '[:alnum:]\(\)\_\.\,\'\&\?\+\-\=\!';
+		$newname = preg_replace('/[^'.$filter.']/', '', $filename);
 		if($filename != $newname)
-			fail('Invalid file name, contains illegal characters in '.$filename);
+			fail('Invalid file name, contains illegal characters in: '.$newname);
 		return $newname;
 	}
 
