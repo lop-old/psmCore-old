@@ -17,6 +17,7 @@ abstract class website {
 
 	public function render() {
 		if(\psm\portal::get()->hasRendered()) return;
+		\psm\portal::get()->hasRendered(TRUE);
 		$this->render_head();
 		$this->render_body();
 	}
