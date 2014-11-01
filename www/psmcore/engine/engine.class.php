@@ -94,22 +94,6 @@ class engine {
 
 
 
-	public function addHead($html, $name=NULL) {
-		if(is_array($html)) {
-			foreach($html as $v)
-				$this->add($v);
-			return;
-		}
-		$data = \trim($html);
-		if(empty($data)) return;
-		if(empty($name))
-			$this->head[] = &$data;
-		else
-			$this->head[$name] = &$data;
-	}
-
-
-
 	public function css($code, $name=NULL) {
 		$data = \trim($code);
 		if(empty($data)) return;
@@ -149,6 +133,23 @@ class engine {
 	}
 	public function usingjQuery() {
 		$this->jsFile(self::JQUERY_JS);
+	}
+
+
+
+	// head content
+	public function addHead($html, $name=NULL) {
+		if(is_array($html)) {
+			foreach($html as $v)
+				$this->add($v);
+			return;
+		}
+		$data = \trim($html);
+		if(empty($data)) return;
+		if(empty($name))
+			$this->head[] = &$data;
+		else
+			$this->head[$name] = &$data;
 	}
 
 
