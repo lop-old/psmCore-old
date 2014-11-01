@@ -95,6 +95,11 @@ class engine {
 
 
 	public function addHead($html, $name=NULL) {
+		if(is_array($html)) {
+			foreach($html as $v)
+				$this->add($v);
+			return;
+		}
 		$data = \trim($html);
 		if(empty($data)) return;
 		if(empty($name))
@@ -150,6 +155,11 @@ class engine {
 
 	// body content
 	public function add($html, $name=NULL) {
+		if(is_array($html)) {
+			foreach($html as $v)
+				$this->add($v);
+			return;
+		}
 		$data = \trim($html);
 		if(empty($data)) return;
 		if(empty($name))
