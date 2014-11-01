@@ -45,23 +45,23 @@ class engine {
 			return self::load_file_exact($file);
 		// entry location - /
 		$data = self::load_file(
-			paths::entry().'/'.
+			paths::entry().DIR_SEP.
 			$file
 		);
 		if($data != NULL) return $data;
 		// entry site - site/html/
 		$site = \psm\portal::get()->getWebsite()->siteName();
 		$data = self::load_file(
-			paths::entry().'/'.
-			$site.'/'.
-			'html/'.
+			paths::entry().DIR_SEP.
+			$site.DIR_SEP.
+			'html'.DIR_SEP.
 			$file
 		);
 		if($data != NULL) return $data;
 		// core location - psmcore/html/
 		$data = self::load_file(
-			paths::core().'/'.
-			'html/'.
+			paths::core().DIR_SEP.
+			'html'.DIR_SEP.
 			$file
 		);
 		if($data != NULL) return $data;
