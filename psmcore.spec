@@ -58,11 +58,13 @@ echo "Install.."
 # create directories
 %{__install} -d -m 0755 \
 	"${RPM_BUILD_ROOT}%{prefix}/engine"   \
-	"${RPM_BUILD_ROOT}%{prefix}/engine/template" \
+		"${RPM_BUILD_ROOT}%{prefix}/engine/template" \
+	"${RPM_BUILD_ROOT}%{prefix}/pages"    \
 	"${RPM_BUILD_ROOT}%{prefix}/portal"   \
 	"${RPM_BUILD_ROOT}%{prefix}/pxdb"     \
 	"${RPM_BUILD_ROOT}%{prefix}/utils"    \
 	"${RPM_BUILD_ROOT}%{prefix}/widgets"  \
+		"${RPM_BUILD_ROOT}%{prefix}/widgets/blog"    \
 	"${RPM_BUILD_ROOT}/etc/httpd/conf.d/" \
 	"${RPM_BUILD_ROOT}/etc/php.d/"        \
 		|| exit 1
@@ -73,23 +75,27 @@ for phpfile in \
 	'ClassLoader.php'                   \
 	'config.php.original'               \
 	'engine/engine.class.php'           \
-	'engine/block.class.php'            \
-	'engine/template/template_interface.class.php' \
-	'engine/template/phpclss.class.php' \
-	'engine/template/tpl.class.php'     \
+		'engine/block.class.php'            \
+		'engine/template/template_interface.class.php' \
+		'engine/template/phpclss.class.php' \
+		'engine/template/tpl.class.php'     \
+	'pages/home.php'                    \
 	'portal/portal.class.php'           \
-	'portal/module.class.php'           \
-	'portal/website.class.php'          \
-	'pxdb/dbPool.class.php'             \
-	'pxdb/dbQuery.class.php'            \
+		'portal/module.class.php'           \
+		'portal/page_interface.class.php'   \
+		'portal/website.class.php'          \
 	'pxdb/pxdb.class.php'               \
-	'utils/csrf.class.php'              \
-	'utils/numbers.class.php'           \
-	'utils/PassCrypt.class.php'         \
-	'utils/san.class.php'               \
-	'utils/strings.class.php'           \
+		'pxdb/dbPool.class.php'             \
+		'pxdb/dbQuery.class.php'            \
 	'utils/utils.class.php'             \
-	'utils/vars.class.php'              \
+		'utils/csrf.class.php'              \
+		'utils/numbers.class.php'           \
+		'utils/PassCrypt.class.php'         \
+		'utils/san.class.php'               \
+		'utils/strings.class.php'           \
+		'utils/vars.class.php'              \
+	'widgets/widget_interface.class.php' \
+		'widgets/blog/blog.class.php'       \
 ; do
 	%{__install} -m 0555 \
 		"%{sourceroot}/www/psmcore/${phpfile}" \
@@ -129,12 +135,14 @@ fi
 %{prefix}/engine/template/template_interface.class.php
 %{prefix}/engine/template/phpclss.class.php
 %{prefix}/engine/template/tpl.class.php
+%{prefix}/pages/home.php
 %{prefix}/portal/portal.class.php
 %{prefix}/portal/module.class.php
+%{prefix}/portal/page_interface.class.php
 %{prefix}/portal/website.class.php
+%{prefix}/pxdb/pxdb.class.php
 %{prefix}/pxdb/dbPool.class.php
 %{prefix}/pxdb/dbQuery.class.php
-%{prefix}/pxdb/pxdb.class.php
 %{prefix}/utils/csrf.class.php
 %{prefix}/utils/numbers.class.php
 %{prefix}/utils/PassCrypt.class.php
@@ -142,6 +150,8 @@ fi
 %{prefix}/utils/strings.class.php
 %{prefix}/utils/utils.class.php
 %{prefix}/utils/vars.class.php
+%{prefix}/widgets/widget_interface.class.php
+%{prefix}/widgets/blog/blog.class.php
 /etc/httpd/conf.d/psmcore.conf
 /etc/php.d/psmcore.ini
 
