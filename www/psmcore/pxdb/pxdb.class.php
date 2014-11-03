@@ -7,18 +7,21 @@ class pxdb {
 
 
 
-	public static function add($pool) {
+	public static function add(\psm\pxdb\dbPool $pool) {
 		$name = $pool->getName();
 		if(isset(self::$pools[$name])) return;
 		self::$pools[$name] = $pool;
 	}
 	public static function add_mysql($name, $host, $port, $user, $pass, $database, $prefix) {
-		if(empty($name)) $name = 'main';
+		if(empty($name))
+			$name = 'main';
+		$name = (string) $name;
 		// check for existing
 		if(isset(self::$pools[$name])) return;
 		// new pool instance
 		self::$pools[$name] = new \psm\pxdb\dbPool(
 			$name,
+			'mysql',
 			$host,
 			$port,
 			$user,
@@ -30,10 +33,21 @@ class pxdb {
 
 
 
-	public function get($name=NULL) {
-		if(!isset(self::$pools[$name]))
+	// get dbPool instance
+	public static function getPool($name=NULL) {
+		if(empty($name))
+			$name = 'main';
+		$name = (string) $name;
+		if(isset(self::$pools[$name]))
+			return self::$pools[$name];
+		return NULL;
+	}
+	// get connection instance
+	public static function get($name=NULL) {
+		$pool = self::getPool($name);
+		if($pool == NULL)
 			return NULL;
-		return self::$pools[$name];
+		return $pool->getConnection();
 	}
 
 
