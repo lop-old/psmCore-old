@@ -52,6 +52,7 @@ class portal {
 		ob_start();
 		// load configs
 		self::ScanConfigs(paths::entry());
+		self::ScanConfigs(paths::site());
 		self::ScanConfigs(paths::core());
 	}
 
