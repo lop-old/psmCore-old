@@ -95,11 +95,11 @@ final class utils {
 	 */
 	public static function ScrollToBottom($id='') {
 		if(empty($id)) $id = 'document';
-		echo NEWLINE.'<!-- ScrollToBottom() -->'.NEWLINE.
-			'<script type="text/javascript"><!--//'.NEWLINE.
+		echo CRLF.'<!-- ScrollToBottom() -->'.CRLF.
+			'<script type="text/javascript"><!--//'.CRLF.
 			$id.'.scrollTop='.$id.'.scrollHeight; '.
 			'window.scroll(0,document.body.offsetHeight); '.
-			'//--></script>'.NEWLINE.NEWLINE;
+			'//--></script>'.CRLF.CRLF;
 	}
 
 

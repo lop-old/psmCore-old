@@ -8,7 +8,7 @@ if(!defined('psm\\INDEX_DEFINE') || \psm\INDEX_DEFINE !== TRUE) { echo '<header>
 // global defines
 define('DIR_SEP',   DIRECTORY_SEPARATOR);
 define('CLASS_EXT', '.class.php');
-define('NEWLINE',   "\n");
+define('CRLF',      "\n");
 define('TAB',       "\t");
 define('S_QUOTE',   '\'');
 define('D_QUOTE',   "\"");
@@ -105,7 +105,7 @@ function backtrace() {
 				unset($trace[$index]);
 		}
 	}
-	echo '<table style="background-color: #ffeedd; padding: 10px; border-width: 1px; border-style: solid; border-color: #aaaaaa;">'.NEWLINE;
+	echo '<table style="background-color: #ffeedd; padding: 10px; border-width: 1px; border-style: solid; border-color: #aaaaaa;">'.CRLF;
 	$first = TRUE;
 	$evenodd = FALSE;
 	foreach($trace as $num => $tr) {
@@ -114,18 +114,18 @@ function backtrace() {
 		$evenodd = ! $evenodd;
 		$bgcolor = ($evenodd ? '#ffe0d0' : '#fff8e8');
 		$first = FALSE;
-		echo '<tr style="background-color: '.$bgcolor.';">'.NEWLINE;
-		echo TAB.'<td><font size="-2">#'.((int) $num).'</font></td>'.NEWLINE;
-		echo TAB.'<td>'.@$tr['file'].'</td>'.NEWLINE;
-		echo '</tr>'.NEWLINE;
-		echo '<tr style="background-color: '.$bgcolor.';">'.NEWLINE;
-		echo TAB.'<td></td>'.NEWLINE;
+		echo '<tr style="background-color: '.$bgcolor.';">'.CRLF;
+		echo TAB.'<td><font size="-2">#'.((int) $num).'</font></td>'.CRLF;
+		echo TAB.'<td>'.@$tr['file'].'</td>'.CRLF;
+		echo '</tr>'.CRLF;
+		echo '<tr style="background-color: '.$bgcolor.';">'.CRLF;
+		echo TAB.'<td></td>'.CRLF;
 		$args = '';
 		foreach($tr['args'] as $arg) {
 			if(!empty($args))
 				$args .= ', ';
 			if(is_string($arg)) {
-				if(strpos($arg, NEWLINE))
+				if(strpos($arg, CRLF))
 					$args .= '<pre>'.$arg.'</pre>';
 				else
 					$args .= $arg;
@@ -139,10 +139,10 @@ function backtrace() {
 				'<b>'.$tr['function'].'</b> '.
 				'( '.$args.' ) '.
 				(isset($tr['line']) ? '<font size="-1">line: '.$tr['line'].'</font>' : '' ).
-				'</td>'.NEWLINE;
-		echo '</tr>'.NEWLINE;
+				'</td>'.CRLF;
+		echo '</tr>'.CRLF;
 	}
-	echo '</table>'.NEWLINE;
+	echo '</table>'.CRLF;
 	//dump($trace);
 }
 
@@ -205,15 +205,15 @@ if(file_exists($kintPath)) {
 }
 // error page
 public static function Error($msg) {
-	echo '<div style="background-color: #ffbbbb;">'.NEWLINE;
+	echo '<div style="background-color: #ffbbbb;">'.CRLF;
 	if(!empty($msg))
-		echo '<h4>Error: '.$msg.'</h4>'.NEWLINE;
-	echo '<h3>Backtrace:</h3>'.NEWLINE;
+		echo '<h4>Error: '.$msg.'</h4>'.CRLF;
+	echo '<h3>Backtrace:</h3>'.CRLF;
 //	if(\method_exists('Kint', 'trace'))
 //		\Kint::trace();
 //	else
 		echo '<pre>'.print_r(\debug_backtrace(), TRUE).'</pre>';
-	echo '</div>'.NEWLINE;
+	echo '</div>'.CRLF;
 //	\psm\Portal::Unload();
 	exit(1);
 }

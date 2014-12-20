@@ -181,86 +181,87 @@ class engine {
 
 
 	public function render_head() {
-		echo '<!DOCTYPE html>'.NEWLINE;
-		echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">'.NEWLINE;
-		echo '<head>'.NEWLINE.
-				'<meta charset="UTF-8" />'.NEWLINE.
-				'<base href="//'.(empty($_SERVER['HTTP_HOST']) ? @$_SERVER['SERVER_NAME'] : @$_SERVER['HTTP_HOST']).'" />'.NEWLINE.
-				'<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />'.NEWLINE.
-				'<meta name="viewport" content="width=device-width, initial-scale=1" />'.NEWLINE.
-				'<meta name="GOOGLEBOT" content="index,follow" />'.NEWLINE;
-		echo '<title>'.(empty($this->title) ? ' ' : $this->title).'</title>'.NEWLINE;
+		echo '<!DOCTYPE html>'.CRLF;
+		echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">'.CRLF;
+		echo '<head>'.CRLF.
+				'<meta charset="UTF-8" />'.CRLF.
+				'<base href="//'.(empty($_SERVER['HTTP_HOST']) ? @$_SERVER['SERVER_NAME'] : @$_SERVER['HTTP_HOST']).'" />'.CRLF.
+				'<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />'.CRLF.
+				'<meta name="viewport" content="width=device-width, initial-scale=1" />'.CRLF.
+				'<meta name="GOOGLEBOT" content="index,follow" />'.CRLF;
+		echo '<title>'.(empty($this->title) ? ' ' : $this->title).'</title>'.CRLF;
 		if(!empty($this->description))
-			echo '<meta name="Description" content="'.$this->description.'" />'.NEWLINE;
-		echo '<meta name="generator" content="psmCore '.self::getVersion().'" />'.NEWLINE;
+			echo '<meta name="Description" content="'.$this->description.'" />'.CRLF;
+		echo '<meta name="generator" content="psmCore '.self::getVersion().'" />'.CRLF;
 		// include css files
 		if(!empty($this->cssfiles)) {
 			foreach($this->cssfiles as $file) {
 				if(empty($file)) continue;
-				echo '<link rel="stylesheet" href="'.$file.'" />'.NEWLINE;
+				echo '<link rel="stylesheet" href="'.$file.'" />'.CRLF;
 			}
 		}
 		// include js files
 		if(!empty($this->jsfiles)) {
 			foreach($this->jsfiles as $file) {
 				if(empty($file)) continue;
-				echo '<script type="text/javascript" src="'.$file.'"></script>'.NEWLINE;
+				echo '<script type="text/javascript" src="'.$file.'"></script>'.CRLF;
 			}
 		}
 		// debug mode
 		if(!\psm\debug())
-			$this->css('.debug {'.NEWLINE.TAB.'display: none;'.NEWLINE.'}');
+			$this->css('.debug {'.CRLF.TAB.'display: none;'.CRLF.'}');
 		// css content
 		foreach($this->css as $name => $chunk) {
-			echo NEWLINE.NEWLINE;
+			echo CRLF.CRLF;
 			if(\is_string($name))
-				echo '<!-- '.$name.' -->'.NEWLINE;
-			echo '<style type="text/css">'.NEWLINE.
-					$chunk.NEWLINE.
-					'</style>'.NEWLINE.
-					NEWLINE.NEWLINE;
+				echo '<!-- '.$name.' -->'.CRLF;
+			echo '<style type="text/css">'.CRLF.
+					$chunk.CRLF.
+					'</style>'.CRLF.
+					CRLF.CRLF;
 		}
 		// js content
 		foreach($this->js as $name => $chunk) {
-			echo NEWLINE.NEWLINE;
+			echo CRLF.CRLF;
 			if(\is_string($name))
-				echo '<!-- '.$name.' -->'.NEWLINE;
-			echo '<script type="text/javascript"><!--//'.NEWLINE.
-					$chunk.NEWLINE.
-					'//--></script>'.NEWLINE.
-					NEWLINE.NEWLINE;
+				echo '<!-- '.$name.' -->'.CRLF;
+			echo '<script type="text/javascript"><!--//'.CRLF.
+					$chunk.CRLF.
+					'//--></script>'.CRLF.
+					CRLF.CRLF;
 		}
 		// header content
 		foreach($this->head as $name => $chunk) {
-			echo NEWLINE.NEWLINE;
+			echo CRLF.CRLF;
 			if(\is_string($name))
-				echo '<!-- '.$name.' -->'.NEWLINE;
-			echo $chunk.NEWLINE.
-					NEWLINE.NEWLINE;
+				echo '<!-- '.$name.' -->'.CRLF;
+			echo $chunk.CRLF.
+					CRLF.CRLF;
 		}
-		echo '</head>'.NEWLINE;
+		echo '</head>'.CRLF;
 	}
 	public function render_body() {
-		echo NEWLINE.
-				'<body>'.NEWLINE.
-				'<!-- ~~~~~~~~~~~~~~~~~~~~ -->'.NEWLINE.
-				NEWLINE.NEWLINE;
+		echo CRLF.
+				'<body>'.CRLF.
+				'<!-- ~~~~~~~~~~~~~~~~~~~~ -->'.CRLF.
+				CRLF.CRLF;
 		if(!empty($this->mainpre))
-			echo $this->mainpre.NEWLINE.
-					NEWLINE.NEWLINE;
+			echo $this->mainpre.CRLF.
+					CRLF.CRLF;
 		foreach($this->body as $name => $chunk) {
-			echo NEWLINE.NEWLINE;
+			echo CRLF.CRLF;
 			if(\is_string($name))
-				echo '<!-- '.$name.' -->'.NEWLINE;
-			echo $chunk.NEWLINE.
-					NEWLINE.NEWLINE;
+				echo '<!-- '.$name.' -->'.CRLF;
+			$this->parseTags($chunk);
+			echo $chunk.CRLF.
+					CRLF.CRLF;
 		}
 		if(!empty($this->mainpost))
-			echo NEWLINE.NEWLINE.
-					$this->mainpost.NEWLINE;
-		echo NEWLINE.NEWLINE.
-				'</body>'.NEWLINE.
-				'</html>'.NEWLINE;
+			echo CRLF.CRLF.
+					$this->mainpost.CRLF;
+		echo CRLF.CRLF.
+				'</body>'.CRLF.
+				'</html>'.CRLF;
 	}
 
 
