@@ -45,8 +45,7 @@ abstract class website {
 		$page = $this->page();
 		// <entry>/pages/<page>.php
 		$path =
-			\psm\paths::entry().DIR_SEP.
-			$this->siteName().DIR_SEP.
+			\psm\paths::site().DIR_SEP.
 			'pages'.DIR_SEP.
 			$page.'.php';
 		if(\file_exists($path)) {

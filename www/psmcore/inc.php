@@ -165,15 +165,15 @@ define('psm\\DEBUG_COOKIE', 'psm_debug');
 
 /*
 // Kint backtracer
-if(file_exists(\psm\Paths::getLocal('portal').DIR_SEP.'kint.php')) {
-	include(\psm\Paths::getLocal('portal').DIR_SEP.'kint.php');
+if(file_exists(paths::getLocal('portal').DIR_SEP.'kint.php')) {
+	include(paths::getLocal('portal').DIR_SEP.'kint.php');
 }
 // php_error
-if(file_exists(\psm\Paths::getLocal('portal').DIR_SEP.'php_error.php')) {
-	include(\psm\Paths::getLocal('portal').DIR_SEP.'php_error.php');
+if(file_exists(paths::getLocal('portal').DIR_SEP.'php_error.php')) {
+	include(paths::getLocal('portal').DIR_SEP.'php_error.php');
 }
 // Kint backtracer
-$kintPath = \psm\Paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'kint'.DIR_SEP.'Kint.class.php';
+$kintPath = paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'kint'.DIR_SEP.'Kint.class.php';
 if(file_exists($kintPath)) {
 	//global $GLOBALS;
 	//if(!@is_array(@$GLOBALS)) $GLOBALS = array();
@@ -190,7 +190,7 @@ if(file_exists($kintPath)) {
 	include($kintPath);
 	}
 	// php_error
-	$phpErrorPath = \psm\Paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'php_error.php';
+	$phpErrorPath = paths::getLocal('portal').DIR_SEP.'debug'.DIR_SEP.'php_error.php';
 	if(file_exists($phpErrorPath))
 		include($phpErrorPath);
 		if(function_exists('php_error\\reportErrors')) {
