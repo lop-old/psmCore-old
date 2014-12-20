@@ -47,6 +47,7 @@ class paths {
 
 	protected static $core  = '';
 	protected static $entry = '';
+	protected static $site  = '';
 
 
 	public static function init() {
@@ -60,6 +61,12 @@ class paths {
 	}
 	public static function entry() {
 		return self::$entry;
+	}
+	public static function site() {
+		if(empty(self::$site))
+			self::$site = self::entry().DIR_SEP.
+				\psm\portal::get()->getWebsite()->siteName();
+		return self::$site;
 	}
 
 
