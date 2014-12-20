@@ -7,6 +7,8 @@ interface widget_interface {
 	public function render();
 	public function output();
 
+	public function setTemplate($file);
+
 
 }
 ?>
