@@ -4,7 +4,7 @@ if(!defined('psm\\INDEX_DEFINE') || \psm\INDEX_DEFINE !== TRUE) { echo '<header>
 interface template_interface {
 
 
-	public function getBlock($name=NULL);
+	public function getBlockString($name=NULL);
 
 
 }

@@ -5,7 +5,7 @@ class tpl implements template_interface {
 
 
 
-	public function getBlock($name=NULL) {
+	public function getBlockString($name=NULL) {
 	}
 
 

@@ -5,7 +5,12 @@ abstract class phpclss implements template_interface {
 
 
 
-	public function getBlock($name=NULL) {
+	public function getBlockString($name=NULL) {
+		if(empty($name))
+			fail('name argument is empty');
+		if(!method_exists($this, $name))
+			fail('Unknown block: '.$name);
+		return $this->$name();
 	}
 
 
