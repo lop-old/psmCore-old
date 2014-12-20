@@ -27,7 +27,7 @@ buildresult=$?
 
 # return the pom files
 mvresult=0
-restorePom "${PWD}/pom.xml" || mvresult=1
+restoreSed "${PWD}/pom.xml" || mvresult=1
 
 
 
