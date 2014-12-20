@@ -50,10 +50,8 @@ class engine {
 		);
 		if($data != NULL) return $data;
 		// entry site - site/html/
-		$site = \psm\portal::get()->getWebsite()->siteName();
 		$data = self::load_file(
-			paths::entry().DIR_SEP.
-			$site.DIR_SEP.
+			paths::site().DIR_SEP.
 			'html'.DIR_SEP.
 			$file
 		);
