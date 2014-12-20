@@ -271,11 +271,15 @@ class dbQuery {
 		if(!isset($this->row[$index])) return FALSE;
 		return \psm\utils\vars::castType($this->row[$index], 'bool');
 	}
-//	public function getDate($index) {
-//		if($this->row == NULL)         return FALSE;
-//		if(!isset($this->row[$index])) return FALSE;
-//		return \psm\utils\vars::castType($this->row[$index], 'int');
-//	}
+	public function getDate($index, $format=NULL) {
+		if($this->row == NULL)         return FALSE;
+		if(!isset($this->row[$index])) return FALSE;
+		$val = $this->getInt($index);
+		if($val === FALSE) return FALSE;
+		if(empty($format))
+			$format = 'Y-m-d H:i:s';
+		return date($format, $val);
+	}
 
 
 
