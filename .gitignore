@@ -11,6 +11,7 @@ rpmbuild-root/
 /data/
 /target/
 /rpmbuild-root/
+/www/psmcore/pxdb/phppdo
 
 config.php
 
