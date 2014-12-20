@@ -41,8 +41,11 @@ if(PHP_VERSION_ID < 50300) {
 // timezone
 //TODO: will make a config entry for this
 try {
-	if(!@date_default_timezone_get())
+	$zone = @date_default_timezone_get();
+	if($zone == 'UTC')
 		@date_default_timezone_set('America/New_York');
+	else
+		@date_default_timezone_set(@date_default_timezone_get());
 } catch(\Exception $ignore) {}
 
 
