@@ -39,59 +39,6 @@ class engine {
 
 
 
-	public static function load($file) {
-		// exact match
-		if(\file_exists($file))
-			return self::load_file_exact($file);
-		// entry location - /
-		$data = self::load_file(
-			paths::entry().DIR_SEP.
-			$file
-		);
-		if($data != NULL) return $data;
-		// entry site - site/html/
-		$data = self::load_file(
-			paths::site().DIR_SEP.
-			'html'.DIR_SEP.
-			$file
-		);
-		if($data != NULL) return $data;
-		// core location - psmcore/html/
-		$data = self::load_file(
-			paths::core().DIR_SEP.
-			'html'.DIR_SEP.
-			$file
-		);
-		if($data != NULL) return $data;
-		// not found
-		fail('File not found: '.$file);
-		return NULL;
-	}
-	public static function load_file($file) {
-		// exact match
-		if(\file_exists($file))
-			return self::load_file_exact($file);
-		// .tpl
-		$data = self::load_file_exact($file.'.tpl');
-		if($data != NULL) return $data;
-		// .tpl.php
-		$data = self::load_file_exact($file.'.tpl.php');
-		if($data != NULL) return $data;
-		// not found
-		return NULL;
-	}
-	public static function load_file_exact($file) {
-		if(!\file_exists($file))
-			return NULL;
-		$data = \file_get_contents($file);
-		if($data != NULL)
-			return $data;
-		fail('Failed to load file: '.$file);
-		return NULL;
-	}
-
-
-
 	public function css($code, $name=NULL) {
 		$data = \trim($code);
 		if(empty($data)) return;

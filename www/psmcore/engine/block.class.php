@@ -8,48 +8,6 @@ class block {
 
 
 
-	public static function load($file, $clss=NULL) {
-		if(empty($file)) return NULL;
-		if(!\file_exists($file)) {
-			fail('File not found: '.$file);
-			return NULL;
-		}
-		// load .tpl.php file
-		if(\psm\utils\strings::EndsWith($file, '.tpl.php')) {
-			if(empty($clss)) {
-				$clss = $file;
-				if(\psm\utils\strings::EndsWith($clss, '.tpl.php'))
-					$clss = substr($clss, 0, 0-strlen('.tpl.php'));
-				$pos = max(
-					strrpos($clss, '/'),
-					strrpos($clss, '\\')
-				);
-				if($pos !== FALSE)
-					$clss = substr($clss, $pos+1);
-				$clss = trim($clss);
-				if(empty($clss))
-					fail('clss argument not set');
-				$clss = \psm\utils\san::Filename($clss).'_tpl';
-				return NULL;
-			}
-			include($file);
-			$result = new $clss();
-			if(method_exists($result, 'css'))
-				\psm\engine::get()->css($result->css());
-			if(method_exists($result, 'js'))
-				\psm\engine::get()->css($result->js());
-			return new self($result);
-		}
-		// load .tpl file
-		if(\psm\utils\strings::EndsWith($file, '.tpl')) {
-			$result = \file_get_contents($file);
-			if($result != NULL)
-				return new self($result);
-		}
-		// not found
-		fail('File not found: '.$file);
-		return NULL;
-	}
 
 
 
