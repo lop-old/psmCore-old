@@ -83,6 +83,8 @@ function ExitNow($code=NULL) {
 	exit(1);
 }
 function fail($msg) {
+	if(!is_string($msg))
+		$msg = print_r($msg, TRUE);
 	echo '<pre style="color: black; background-color: #ffaaaa; padding: 10px;"><font size="+2">FATAL: '.$msg.'</font></pre>';
 	if(\psm\debug())
 		backtrace();
