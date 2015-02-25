@@ -75,6 +75,7 @@ for phpfile in \
 	'ClassLoader.php'                   \
 	'config.php.original'               \
 	'engine/engine.class.php'           \
+		'engine/loader.class.php'           \
 		'engine/block.class.php'            \
 		'engine/template/template_interface.class.php' \
 		'engine/template/phpclss.class.php' \
@@ -131,6 +132,7 @@ fi
 %{prefix}/ClassLoader.php
 %{prefix}/config.php.original
 %{prefix}/engine/engine.class.php
+%{prefix}/engine/loader.class.php
 %{prefix}/engine/block.class.php
 %{prefix}/engine/template/template_interface.class.php
 %{prefix}/engine/template/phpclss.class.php
