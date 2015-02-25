@@ -98,7 +98,7 @@ for phpfile in \
 		'widgets/blog/blog.class.php'       \
 ; do
 	%{__install} -m 0555 \
-		"%{sourceroot}/www/psmcore/${phpfile}" \
+		"%{SOURCE_ROOT}/www/psmcore/${phpfile}" \
 		"${RPM_BUILD_ROOT}%{prefix}/${phpfile}" \
 			|| exit 1
 done
