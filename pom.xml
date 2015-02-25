@@ -6,7 +6,7 @@
 	<name>ProSiteManager CMS Framework</name>
 	<groupId>com.poixson.psm</groupId>
 	<artifactId>psmcore</artifactId>
-	<version>3.4.x-SNAPSHOT</version>
+	<version>3.4.x</version>
 	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
