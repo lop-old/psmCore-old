@@ -1,17 +1,32 @@
+bin/
+target/
 rpmbuild-root/
-.git/
-*.rpm
+out/
+build/
 
+.classpath
+.project
+.git/
+.settings/
+
+*.class
+*.iml
+*.idea
+*.jar
+*.rpm
+*.war
+*.ear
+*.zip
+*.exe
+*.lock
+*.out
 *.swp
 .*.swp
 *~
 
 .htaccess
+config.php
 /psmcore/static/
 /data/
-/target/
-/rpmbuild-root/
 /www/psmcore/pxdb/phppdo
-
-config.php
 
