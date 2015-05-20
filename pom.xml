@@ -39,6 +39,14 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<!-- Workaround for http://jira.codehaus.org/browse/MECLIPSE-94 -->
+					<eclipseProjectDir>.</eclipseProjectDir>
+				</configuration>
+			</plugin>
 <!--
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
